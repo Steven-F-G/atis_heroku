@@ -7,6 +7,7 @@ from ensurepip import bootstrap
 from flask import Flask, request, redirect,url_for
 app = Flask(__name__)
 
+import tensorflow as tf
 import numpy as np
 import pandas as pd
 import joblib
@@ -15,9 +16,10 @@ from tqdm import tqdm
 tqdm.pandas()
 from sklearn import preprocessing
 from keras.preprocessing.text import Tokenizer
-from keras.preprocessing.sequence import pad_sequences
+from keras_preprocessing.sequence import pad_sequences
 from keras.layers import Input, Embedding, Activation, Flatten, Dense, Conv1D, MaxPooling1D, Dropout
 from keras.models import Model, load_model
+from keras_self_attention import SeqSelfAttention
 from sentence_transformers import SentenceTransformer
 from nltk.tokenize import RegexpTokenizer
 tokenizer = RegexpTokenizer(r'\w+')
@@ -188,15 +190,15 @@ def create_intelligent_word_embedding(text):
 
   return final_embedding, bert_embedding, charcnn_embedding
 
-model_atis = load_model("../data/atis_multi_task")
-charCNN_model = load_model("../data/charCNN")
+model_atis = load_model("./data/atis_multi_task")
+charCNN_model = load_model("./data/charCNN")
 bert_model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
 
-dac_la=joblib.load('../data/dac_label.joblib')
-intent_la=joblib.load('../data/intent_label.joblib')
-with open("../data/slot_label", "rb") as fp:
+dac_la=joblib.load('./data/dac_label.joblib')
+intent_la=joblib.load('./data/intent_label.joblib')
+with open("./data/slot_label", "rb") as fp:
     label_list = pickle.load(fp)
-with open("../data/slot_index", "rb") as fp:
+with open("./data/slot_index", "rb") as fp:
     index_list = pickle.load(fp)
 
 
@@ -216,7 +218,6 @@ def predict():
 
   query_col = []
   a = [query_col.append(text.split(" ")) for text in query_df["sen"]]
-  from keras.preprocessing.sequence import pad_sequences
   padded = pad_sequences(sequences=query_col, maxlen=24, dtype=object, padding='post', truncating='post', value="<UNK>")
   res = [' '.join(ele) for ele in padded]
   query_df["pad_sen"] = res
@@ -561,7 +562,7 @@ def predict():
 
 def create_app():
   app = Flask(__name__)
-  app.run(debug=True)
+  app.run(debug=True, threaded = True)
   bootstrap = Bootstrap(app)
 
   return app
