@@ -1,0 +1,358 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="https://imghoster.de/images/2022/05/03/PinClipart.com_airplane-clipart-black-and_5609285-1.png">
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/29662a0cc5.js" crossorigin="anonymous"></script>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<style>
+    input {
+      text-align: center;
+    }
+    ::-webkit-input-placeholder {
+      text-align: center;
+    }
+    :-moz-placeholder {
+      text-align: center;
+    }
+    body {
+    /* background: #1a1a1b; */
+    background-image: radial-gradient( circle farthest-corner at -4% -12.9%,  rgb(57, 75, 83) 0.3%, rgb(25, 28, 41) 90.2% );
+    color: #f2efe2;
+    font-size: 16px;
+    }
+    .text-box {
+    max-height: 70vh;
+    overflow: scroll;
+    }
+    .text-box:focus {
+    outline: none;
+    }
+    .text-box p {
+    border-bottom: 1px dotted black;
+    margin: 0px !important;
+    }
+    .fa {
+    color: white;
+    background-image: radial-gradient( circle 976px at 51.2% 51%,  rgba(11,27,103,1) 0%, rgba(16,66,157,1) 0%, rgba(11,27,103,1) 17.3%, rgba(11,27,103,1) 58.8%, rgba(11,27,103,1) 71.4%, rgba(16,66,157,1) 100.2%, rgba(187,187,187,1) 100.2% );
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: 1rem;
+    width: 4rem;
+    height: 4rem;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    }
+    .fa1 {
+    color: white;
+    background-image:rgb(241, 241, 241);
+    cursor: pointer;
+    margin-top: 1rem;
+    width: 4rem;
+    height: 4rem;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    }
+    @media (max-width: 768px) {
+    .container {
+        width: 85vw;
+        max-width: 85vw;
+    }
+    .text-box {
+        max-height: 55vh;
+    }
+    }
+    .fa:hover {
+  border: 5px solid #81D9FF;
+  cursor: pointer;
+}
+    .btn-funky-moon {
+    background: #A770EF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(145deg, #FDB99B, #CF8BF3, #A770EF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(145deg, #FDB99B, #CF8BF3, #A770EF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff;
+    border: 3px solid #eee;
+}
+.nav-funky-moon {
+    background: #A770EF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(145deg, #FDB99B, #CF8BF3, #A770EF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(145deg, #FDB99B, #CF8BF3, #A770EF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff;
+}
+.div-funky-moon {
+    background: #A770EF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(145deg, #FDB99B, #CF8BF3, #A770EF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(145deg, #FDB99B, #CF8BF3, #A770EF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff;
+}
+
+.btn-rounded {
+    border-radius: 35px;
+}
+
+.frosted-card {
+  background-color: rgba(207, 181, 181, 0.308) ;
+  overflow: hidden;
+}
+.frosted-card:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: inset 0 0 1000px rgba(0,0,0,.5);
+  filter: blur(70px);
+}
+
+.frosted-card h3 {
+  font-weight: 100 !important;
+  text-shadow: 1px 0px 1px rgba(0,0,0,.15);
+  text-align: center;
+}
+
+.frosted-card p {
+  font-weight:100;
+  text-shadow: 1px 0px 1px rgba(0,0,0,.15);
+  font-size: .875rem;
+  text-align: center;
+}
+
+.div_shadow_left
+{
+  box-shadow: rgba(240, 46, 170, 0.4) -5px 5px, rgba(240, 46, 170, 0.3) -10px 10px, rgba(240, 46, 170, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(240, 46, 170, 0.05) -25px 25px;
+  }
+.div_shadow_mid
+{
+  box-shadow: rgba(240, 46, 170, 0.4) 0px 5px, rgba(240, 46, 170, 0.3) 0px 10px, rgba(240, 46, 170, 0.2) 0px 15px, rgba(240, 46, 170, 0.1) 0px 20px, rgba(240, 46, 170, 0.05) 0px 25px;
+}
+.div_shadow_right
+{
+  box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
+}
+.div_shadow
+{
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+@keyframes bounce {
+	0%, 20%, 60%, 100% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
+
+	40% {
+		-webkit-transform: translateY(-20px);
+		transform: translateY(-20px);
+	}
+
+	80% {
+		-webkit-transform: translateY(-10px);
+		transform: translateY(-10px);
+	}
+}
+.mc:hover {
+	animation: bounce 1s;
+}
+/* .overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  transition: .5s ease;
+} */
+.mid1:hover .overlay {
+  height: 100%;
+}
+.mid1 {
+  position: relative;
+  width: 100%;
+}
+
+</style>
+
+
+<script>
+      function submitForm() {
+   var frm = document.getElementsByName('query_form')[0];
+    
+   document.getElementById("search_loader").innerHTML = '<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>';
+
+   frm.submit(); // Submit the form
+   frm.reset();  // Reset all form data
+   return false; // Prevent page refresh
+}
+
+
+</script>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light nav-funky-moon">
+        <a class="navbar-brand" href="/">FYP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/orgs/CS6811-Project-Work/repositories" target="_blank">Github</a>
+            </li>
+           
+            
+        </div>
+      </nav>
+    <br>
+    <center>
+    <h1>
+      <i class="fas fa-plane fa-rotate-by"" style="font-size: 4rem;color:#ffffff; inline-block;--fa-rotate-angle: -45deg;"></i>
+        <a style="text-decoration: none;color: #ffffff;font-size: larger;" href="/">ATIS Enquiry System</a>
+    </h1>
+    </center>
+    <center>
+         <small class="text-muted" style="font-size: large;">Real time query answering with state of the art AI.</small>
+    </center>
+    <br>
+    <br>
+    <form action="/predict" method="POST">
+        <div class="form-group">
+          <small id="emailHelp" class="form-text text-muted"><center><h2 style="color: #f2efe2;">Enter your flight related queries</h2></center><center></center></small>
+          <br>
+          <div style="align-content: center;margin: auto;width: fit-content;">
+              <center><input  id="input" class="form-control" name="input" style="font-size: large;width: 500px;display: inline-block;margin: auto;">     
+                <button style="width:6rem;height:3rem;font-size: 15px;margin-left:10px" submit" class="btn btn-funky-moon btn-rounded" onclick="submitForm()"><div id="search_loader"><small style="font-size:18px;">Search</small></div></button>
+                </center>
+            </div>
+        </div>
+        <center>
+          <div id="speech_icon">
+            <i id="speech_button" class="fa fa-microphone" style="font-size:38px;display: inline;" onclick="runSpeechRecognition()"></i>
+            <div id="blink" style="visibility:hidden ;" class="spinner-grow text-danger" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+            <span style="visibility:hidden;" id="action">&nbsp;
+            </div>
+        </center>
+        <br>
+      </form>
+      <br>
+      <br>
+      <br>
+      <br>
+      <center> 
+      <!-- <img class="img-responsive" style="border-radius: 20px;image-resolution:from-image;width:100%;"src="https://i.ibb.co/tK7JccZ/m23bwh4n0x151.png" border="0"> -->
+      </center>
+      <!-- {% if error %}
+    <p><strong>Error:</strong> {{ error }} sdsdsdsd </p>
+  {% endif %} -->
+      <center>
+      <div style="align-content: center;margin: auto;width: fit-content;">
+      <div id="mc" class="wrapper div_shadow_left mc" style="float:left;display: inline;margin-left: 40px;">
+        <div class="div-funky-moon" style="height: fit-content;border-top-left-radius: 15px; border-top-right-radius: 15px;">
+          <small style="font-size:30px;">I</small>
+        </div>
+          <div class="card-body card frosted-card text-white" style="height: 200px;border-top-left-radius:0px; border-top-right-radius:0px;">
+              <h3>Frosted Card</h3>
+              <p>hdhh didd iddihdihhdf df fiahiashd isad iashd </p>
+        </div>
+      </div>
+
+      <div class="wrapper div_shadow_mid mc" style="float:left;display: inline;margin-left: 40px;">
+        <div class="div-funky-moon" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+          <small style="font-size:30px;">don't</small>
+        </div>
+          <div class="card-body card frosted-card text-white" style="height: 200px;border-top-left-radius:0px; border-top-right-radius:0px;">
+              <h3>Frosted Card</h3>
+              <p>hdhh didd iddihdihhdf df fiahiashd isad iashd </p>
+        </div>
+      </div>
+
+      <div class="wrapper div_shadow_mid mc" style="float:left;display: inline;margin-left: 40px;">
+        <div class="div-funky-moon" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+          <small style="font-size:30px;">know</small>
+        </div>
+          <div class="card-body card frosted-card text-white" style="height: 200px;border-top-left-radius:0px; border-top-right-radius:0px;">
+              <h3>Frosted Card</h3>
+              <p>hdhh didd iddihdihhdf df fiahiashd isad iashd </p>
+        </div>
+      </div>
+
+      <div class="wrapper div_shadow_right mc" style="float:left;display: inline;margin-left: 40px;">
+        <div class="div-funky-moon" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+          <small style="font-size:30px;">Something</small>
+        </div>
+          <div class="card-body card frosted-card text-white" style="height: 200px;border-top-left-radius:0px;">
+              <h3>Frosted Card</h3>
+              <p>hdhh didd iddihdihhdf df fiahiashd isad iashd </p>
+        </div>
+      </div>
+      
+      </div>
+
+</center>
+<br>
+
+      <script>
+        /* JS comes here */
+        function runSpeechRecognition() {
+            // get output div reference
+            var blink = document.getElementById("blink");
+            blink.style.visibility = "visible";
+            var output = document.getElementById("input");
+            var button = document.getElementById("speech_button");
+            // get action element reference
+            var action = document.getElementById("action");
+            action.style.visibility = "visible";
+            // new speech recognition object
+            var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+            var recognition = new SpeechRecognition();
+            recognition.interimResults = true;
+        
+            // This runs when the speech recognition service starts
+            recognition.onstart = function() {
+                action.innerHTML = "<h6>Listening</h6>";
+            };
+            
+            recognition.onspeechend = function() {
+              
+              
+                recognition.stop();
+                action.innerHTML = "<h6>Done :)</h6>";
+                setTimeout(function(){
+                  blink.style.visibility = "hidden";
+                action.style.visibility = "hidden";
+                }, 1500);
+            }
+          
+            // This runs when the speech recognition service returns result
+            recognition.onresult = function(event) {
+                var transcript = event.results[0][0].transcript;
+                var confidence = event.results[0][0].confidence;
+                output.value =transcript;
+                output.classList.remove("hide");
+                
+
+            };
+          
+             // start recognition
+             recognition.start();
+        }
+    </script>
+    {% block content %}
+    {% endblock %}
+    <script src="index.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

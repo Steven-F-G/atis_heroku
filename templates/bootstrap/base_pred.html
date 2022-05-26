@@ -1,0 +1,394 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://kit.fontawesome.com/29662a0cc5.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="https://imghoster.de/images/2022/05/03/PinClipart.com_airplane-clipart-black-and_5609285-1.png">
+    <title>ATIS Predictions</title>
+</head>
+<style>
+  input {
+    text-align: center;
+  }
+  ::-webkit-input-placeholder {
+    text-align: center;
+  }
+  :-moz-placeholder {
+    text-align: center;
+  }
+  body {
+  background-image: radial-gradient( circle farthest-corner at -4% -12.9%,  rgb(57, 75, 83) 0.3%, rgb(25, 28, 41) 90.2% );
+  color: #f2efe2;
+  font-size: 16px;
+  height: 100%; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  }
+
+.text-box {
+max-height: 70vh;
+overflow: scroll;
+}
+.text-box:focus {
+outline: none;
+}
+.text-box p {
+border-bottom: 1px dotted black;
+margin: 0px !important;
+}
+.fa {
+color: white;
+background: #1e2440;
+border-radius: 50%;
+cursor: pointer;
+margin-top: 1rem;
+width: 2rem;
+height: 2rem;
+display: flex !important;
+align-items: center;
+justify-content: center;
+}
+@media (max-width: 768px) {
+.container {
+  width: 85vw;
+  max-width: 85vw;
+}
+.text-box {
+  max-height: 55vh;
+}
+}
+.btn-funky-moon {
+    background: #A770EF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(145deg, #FDB99B, #CF8BF3, #A770EF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(145deg, #FDB99B, #CF8BF3, #A770EF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff;
+    border: 3px solid #eee;
+}
+.nav-funky-moon {
+    background: #A770EF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(145deg, #FDB99B, #CF8BF3, #A770EF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(145deg, #FDB99B, #CF8BF3, #A770EF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff;
+}
+.div-funky-moon {
+    background: #A770EF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(145deg, #FDB99B, #CF8BF3, #A770EF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(145deg, #FDB99B, #CF8BF3, #A770EF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff;
+}
+
+.btn-rounded {
+    border-radius: 35px;
+}
+
+.card{
+  border: none;
+  transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+ overflow:hidden;
+ border-radius:20px;
+ /* min-height:450px; */
+   box-shadow: 0 0 12px 0 rgba(0,0,0,0.2);
+
+ @media (max-width: 768px) {
+  /* min-height:350px; */
+}
+}
+
+&.card-has-bg{
+ transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+  background-size:120%;
+  background-repeat:no-repeat;
+  background-position: center center;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: inherit;
+    -webkit-filter: grayscale(1);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: grayscale(100%);
+  filter: blur(70px);
+}
+
+  &:hover {
+    transform: scale(0.98);
+     box-shadow: 0 0 5px -2px rgba(0,0,0,0.3);
+    background-size:130%;
+     transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+
+    .card-img-overlay {
+      transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+      background: rgb(35,79,109);
+     background: linear-gradient(0deg, rgba(4,69,114,0.5) 0%, rgba(4,69,114,1) 100%);
+     }
+  }
+
+  .inner_shadow
+  {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  }
+}
+
+</style>
+
+  <script>
+      function submitForm() {
+   var frm = document.getElementsByName('query_form')[0];
+//    frm.submit(); // Submit the form
+   frm.reset();  // Reset all form data
+   return false; // Prevent page refresh
+}
+  </script>
+<body style="max-height: 200%;">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light nav-funky-moon">
+    <a class="navbar-brand" href="localhost:5000/">FYP</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/orgs/CS6811-Project-Work/repositories" target="_blank">Github</a>
+        </li>
+       
+        
+    </div>
+  </nav>
+    <br>
+    <center>
+    <h1>
+      <i class="fas fa-plane fa-rotate-by"" style="font-size: 4rem;color:#ffffff; inline-block;--fa-rotate-angle: -45deg;"></i>
+      <a style="text-decoration: none;color: #ffffff;font-size: larger;" href="/">ATIS Enquiry System</a>
+      </h1>
+    </center>
+    <center>
+         <small class="text-muted" style="font-size: medium;">Real time query answering with state of the art AI.</small>
+    </center>
+    <br>
+    <center>
+    <div class="text-white inner_shadow" style="max-width:fit-content;">
+      <br>
+      <h4 style="text-shadow: 2px 2px 0px #000000;">
+        {{q}}
+      </h4>
+      <br>
+      <div style="align-self: center;">
+        <h5 style="text-shadow: 2px 2px 0px #000000;">Dialogue Act : {{dp}}</h5>
+        <h5 style="text-shadow: 2px 2px 0px #000000;">Intent : {{ip}}</h5>
+        <h5 style="text-shadow: 2px 2px 0px #000000;">Slots : {{sp}}</h5>
+      </div>
+      <br>
+    </div>
+  </center>     
+  <br>
+  <center><button style="font-size: 20px;margin-left:10px" class="btn btn-funky-moon btn-rounded" onclick="res()">Toggle response</button></center>
+    <br>
+    <!-- <a href="https://ibb.co/0XNj9M1"><img src="https://i.ibb.co/n02s1c4/back.png" alt="back" border="0"></a> -->
+    <center>
+    <br>
+    <center>
+    <hr class="style13" style="border-color: #ffffff;width: 800px;">
+    </center>
+    {% block content %}
+    <br>
+    <div id="responses" style="display: none;">
+    <center>
+      <h2>{{heading}}</h2>
+      <br>
+    </center>
+    <center>
+    <nav class="navbar navbar-expand-lg" style="width: fit-content;border-top-left-radius:10px;border-bottom-left-radius:10px;border-top-right-radius:10px;border-bottom-right-radius:10px;background: linear-gradient(to right, rgba(48, 207, 208, 0.4), rgba(18, 99, 99, 0.4))">
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <h5>&nbsp;&nbsp;{{trip}}&nbsp;&nbsp;|&nbsp;&nbsp;</h5>
+          </li>
+          <li class="nav-item">
+            <h5>{{source}} to {{destination}}&nbsp;&nbsp;|&nbsp;&nbsp;</h5>
+          </li>
+          <li class="nav-item">
+            <h5>{{dep_date}}
+              {% if trip == "round trip" %}
+              -- {{ret_date}}
+              {% endif %}&nbsp;&nbsp;</h5>
+          </li>
+         
+          
+      </div>
+    </nav>
+    </center>
+    <br>
+    {% for li in air_data %}
+<center>
+  <div class="card" style="max-width:70%;height:fit-content;background: linear-gradient(to top, #abbaab, #ffffff);">
+    <a style="text-decoration: none;" data-toggle="collapse" href="#collapseExample{{li['no']}}" aria-controls="collapseExample{{li['no']}}">
+    <div class="card-body"style="height: fit-content;">
+      <table>
+        <tr>
+          <td style="margin-left:30px;"><img alt src="{{li['img']}}"></td>
+          <td style="width: 10px;"></td>
+          <td style="margin-left:30px;"><h5 class="card-title airline" style="color:black;height: fit-content;">{{li['airline']}}</h5></td>
+          <td style="width: 100px;"></td>
+          <td><h5 class="card-title dur" style="color:black;height: fit-content;">{{li['duration']}}  |  {{li['stoppings']}}</h5></td>
+          <td style="width: 100px;"></td>
+          <td><h5 class="card-title port" style="color:black;height: fit-content;">{{li['fromCode']}}  -- {{li['toCode']}}</h5></td>
+          <td style="width: 100px;"></td>
+          <td><h5 class="card-title fare" style="color:black;height: fit-content;">{{li['price']}}</h5></td>
+        </tr>
+      </table>
+    </div>
+  </a>
+    <div class="collapse" id="collapseExample{{li['no']}}" style="height:fit-content;background-color:#ffffff;box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;">
+      <div class="card-body" style="height: fit-content;">
+        <table>
+          <tr>
+              <td><h5 class ="timings" style="color: black;width: fit-content;">{{li['fromTimings']}}</h5></td>
+              <td style="width: 200px;"></td>
+              <td><h5 class ="timings" style="color: black;width: fit-content;">{{li['toTimings']}}</h5></td>
+          </tr>
+          <tr>
+              <td><h5 class="port" style="color: black;">{{li['fromAirport']}} , {{li['fromCode']}}</h5></td>
+              <td style="width: 200px;"></td>
+              <td><h5 class="port" style="color: black;">{{li['toAirport']}} , {{li['toCode']}}</h5></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <br>  
+</center>
+<br>
+      <!-- <h1>{{li}}</h1> -->
+{% endfor %}
+<center>
+  {% if trip == "round trip" %}
+    <h3>Return Flights</h3>
+    <br>
+    {% for li in air_data_round %}
+    <center>
+      <div class="card" style="max-width:70%;height:fit-content;background: linear-gradient(to top, #abbaab, #ffffff);">
+        <a style="text-decoration: none;" data-toggle="collapse" href="#collapseExample{{li['no']}}return" aria-controls="collapseExample{{li['no']}}return">
+        <div class="card-body"style="height: fit-content;">
+          <table>
+            <tr>
+              <td style="margin-left:30px;"><img alt src="{{li['img']}}"></td>
+              <td style="width: 10px;"></td>
+              <td style="margin-left:30px;"><h5 class="card-title airline" style="color:black;height: fit-content;">{{li['airline']}}</h5></td>
+              <td style="width: 100px;"></td>
+              <td><h5 class="card-title dur" style="color:black;height: fit-content;">{{li['duration']}}  |  {{li['stoppings']}}</h5></td>
+              <td style="width: 100px;"></td>
+              <td><h5 class="card-title port" style="color:black;height: fit-content;">{{li['fromCode']}}  -- {{li['toCode']}}</h5></td>
+              <td style="width: 100px;"></td>
+              <td><h5 class="card-title fare" style="color:black;height: fit-content;">{{li['price']}}</h5></td>
+            </tr>
+          </table>
+        </div>
+      </a>
+        <div class="collapse" id="collapseExample{{li['no']}}return" style="height:fit-content;background-color:#ffffff;box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;">
+          <div class="card-body" style="height: fit-content;">
+            <table>
+              <tr>
+                  <td><h5 class ="timings" style="color: black;width: fit-content;">{{li['fromTimings']}}</h5></td>
+                  <td style="width: 200px;"></td>
+                  <td><h5 class ="timings" style="color: black;width: fit-content;">{{li['toTimings']}}</h5></td>
+              </tr>
+              <tr>
+                  <td><h5 class="port" style="color: black;">{{li['fromAirport']}} , {{li['fromCode']}}</h5></td>
+                  <td style="width: 200px;"></td>
+                  <td><h5 class="port" style="color: black;">{{li['toAirport']}} , {{li['toCode']}}</h5></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <br>  
+    </center>
+    <br>
+          <!-- <h1>{{li}}</h1> -->
+    {% endfor %}
+  {% endif %}
+</center>
+</div>
+<br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<script>
+  function res()
+  {
+    var res = document.getElementById('responses');
+    if(res.style.display == 'block')
+      res.style.display = 'none';
+    else
+      res.style.display = 'block';
+    
+  }
+  function highlight()
+  {
+    var pred_intent = "{{ip}}"
+    switch(pred_intent)
+    {
+      case 'atis_airfare':
+        var number_of_elements = document.getElementsByClassName('fare').length;
+        var i =0;
+        while (i<number_of_elements) 
+        {
+        document.getElementsByClassName('fare')[i].style.backgroundColor= 'yellow';
+        i++;
+        } 
+      break;
+      case 'atis_flight_time':
+        var number_of_elements = document.getElementsByClassName('timings').length;
+        var i =0;
+        while (i<number_of_elements) 
+        {
+        document.getElementsByClassName('timings')[i].style.backgroundColor= 'yellow';
+        i++;
+        } 
+      break;
+      case 'atis_airline':
+        var number_of_elements = document.getElementsByClassName('airline').length;
+        var i =0;
+        while (i<number_of_elements) 
+        {
+        document.getElementsByClassName('airline')[i].style.backgroundColor= 'yellow';
+        i++;
+        } 
+      break;
+      case 'atis_airport':
+        var number_of_elements = document.getElementsByClassName('port').length;
+        var i =0;
+        while (i<number_of_elements) 
+        {
+        document.getElementsByClassName('port')[i].style.backgroundColor= 'yellow';
+        i++;
+        } 
+      break;
+      case 'atis_distance':
+        var number_of_elements = document.getElementsByClassName('dur').length;
+        var i =0;
+        while (i<number_of_elements) 
+        {
+        document.getElementsByClassName('dur')[i].style.backgroundColor= 'yellow';
+        i++;
+        } 
+      break;
+
+    }
+  }
+  window.onload = highlight;
+</script>
+{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
